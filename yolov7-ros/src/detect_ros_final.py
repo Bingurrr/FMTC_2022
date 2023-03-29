@@ -127,12 +127,13 @@ class Yolov7Publisher:
         # default_num = "class_num"
         # self.class_publisher = rospy.Publisher(
         #     default_num, Int32, queue_size=queue_size
-        # )
+################################################################################################################
+##################                 Publisher 선언                ##################
 
         self.traffic_publisher = rospy.Publisher("traffic_light2", Bool, queue_size=queue_size)
         self.emergency_publisher = rospy.Publisher("emergency_light2", Bool, queue_size=queue_size)
 
-
+################################################################################################################
 
         rospy.loginfo("YOLOv7 initialization complete. Ready to start inference")
 
@@ -193,9 +194,9 @@ class Yolov7Publisher:
             #################################3
         
             # cal_area()
-            
-            ###################################
-            ### publish
+################################################################################################################
+###################################        발행 조건 -> Publish         ###################################
+
             if len(classes) > 0 :
                 if(2 in classes or 5 in classes or 8 in classes):
                     self.traffic_publisher.publish(True)
@@ -213,7 +214,7 @@ class Yolov7Publisher:
                 self.emergency_publisher.publish(False)
                 # rospy.Publisher(int(classes[0]))
 
-    
+################################################################################################################
 
 
             vis_img = draw_detections(np_img_orig, bboxes, classes,
